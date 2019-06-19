@@ -24,10 +24,11 @@ function HomePage(props) {
     </>
 }
 
-HomePage.getInitialProps = async () => {
-    const res = await fetch('https://swapi.co/api/people/1/');
-    const data = await res.json();
+HomePage.getInitialProps = async ( {res}) => {
+    const resp = await fetch('https://swapi.co/api/people/1/');
+    const data = await resp.json();
     console.log(data);
+    res.setHeaderValue("Cache-Control", 's-maxage=10, stale-while-revalidate')
   return {
     data
   }
